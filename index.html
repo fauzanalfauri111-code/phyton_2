@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Adventure — Misi 02</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#18202a;--muted:#667085;--primary:#0f766e;--primary2:#14b8a6;--border:#e6e8ef;--code:#171923;--accent:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:980px;margin:auto;padding:20px}.hero{background:linear-gradient(135deg,#123c3a,#0f766e);color:white;border-radius:24px;padding:34px 28px;margin:18px 0 22px;position:relative;overflow:hidden}.hero:after{content:"💰";position:absolute;right:25px;bottom:-20px;font-size:120px;opacity:.15}
+.badge{display:inline-block;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:99px;font-size:13px}h1{font-size:clamp(30px,6vw,52px);line-height:1.05;margin:14px 0 8px}.hero p{max-width:680px;color:#e4fffb}
+.progress{height:10px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;margin-top:18px}.bar{height:100%;width:0;background:#fff;border-radius:99px;transition:.4s}
+nav{position:sticky;top:0;z-index:5;background:rgba(246,247,251,.94);backdrop-filter:blur(8px);padding:10px 0;border-bottom:1px solid var(--border)}.navinner{max-width:980px;margin:auto;padding:0 20px;display:flex;gap:8px;overflow:auto}.navinner a{white-space:nowrap;text-decoration:none;color:var(--text);background:white;border:1px solid var(--border);padding:8px 12px;border-radius:10px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 5px 18px rgba(20,20,50,.04)}h2{margin-top:0;font-size:25px}h3{margin-bottom:7px}.time{float:right;color:var(--primary);font-size:13px;font-weight:700}.callout{background:#ecfdf5;border-left:5px solid var(--primary);padding:15px;border-radius:12px}.code{background:var(--code);color:#e9edf5;border-radius:14px;padding:18px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;white-space:pre}
+button,.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--primary);color:white;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;margin:5px 4px 5px 0}.btn.secondary,button.secondary{background:#dff7f3;color:#075e57}
+input,textarea{width:100%;padding:11px 13px;border:1px solid #d8dbe5;border-radius:10px;font:inherit;margin:6px 0 12px}textarea{min-height:90px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.mission,.level{border:1px solid var(--border);border-radius:14px;padding:15px}.check{display:flex;gap:9px;align-items:center;margin:8px 0}.check input{width:auto;margin:0}.quiz label{display:block;padding:10px;border:1px solid var(--border);border-radius:10px;margin:8px 0;cursor:pointer}.result{font-weight:700;margin-top:10px}.receipt{background:#fffdf5;border:2px dashed #d6b56c;border-radius:14px;padding:18px;font-family:monospace;white-space:pre-wrap}.tip{background:#fff7ed;border-left:5px solid var(--accent);padding:15px;border-radius:12px}
+footer{text-align:center;color:var(--muted);padding:30px 10px}@media(max-width:600px){.container{padding:12px}.hero{padding:26px 20px}.card{padding:18px}.time{float:none;display:block;margin-bottom:5px}}
+</style>
+</head>
+<body>
+<nav><div class="navinner">
+<a href="#misi">🎯 Misi</a><a href="#input">⌨️ Input</a><a href="#operator">➗ Operator</a><a href="#proyek">💰 Kasir</a><a href="#challenge">🔥 Challenge</a><a href="#debug">🕵️ Debug</a><a href="#refleksi">📝 Refleksi</a>
+</div></nav>
+
+<main class="container">
+<section class="hero">
+<span class="badge">INFORMATIKA • KELAS X • 2 JP / 90 MENIT</span>
+<h1>🐍 Python Adventure</h1>
+<h2>Misi 02 — Jadilah Kasir Digital!</h2>
+<p>Hari ini kamu akan membuat program yang bisa menerima data, menghitung harga belanja, menerima pembayaran, dan menghitung kembalian.</p>
+<div class="progress"><div class="bar" id="bar"></div></div><small id="progressText">Progress: 0%</small>
+</section>
+
+<section class="card" id="misi">
+<span class="time">⏱️ 5 menit</span><h2>🎯 Misi Hari Ini</h2>
+<p>Kamu bekerja sebagai kasir di sebuah kantin. Masalahnya, menghitung belanja satu per satu bisa bikin pusing. Tugasmu: <b>buat kasir digital dengan Python.</b></p>
+<div class="callout"><b>MISSION:</b> Program harus menerima nama barang, harga, jumlah, uang pembayaran, lalu menghitung total dan kembalian.</div>
+<label class="check"><input type="checkbox" class="progressCheck"> Saya sudah membuka Google Colab.</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Saya memahami fungsi input().</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Saya bisa menggunakan operator matematika.</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Program kasir saya berhasil.</label>
+</section>
+
+<section class="card" id="input">
+<span class="time">⏱️ 15 menit</span><h2>⌨️ Misi 1 — Membuat Komputer Bertanya</h2>
+<p>Pada pertemuan pertama, data langsung kita tulis di kode. Sekarang komputer akan <b>bertanya kepada pengguna</b> menggunakan <code>input()</code>.</p>
+<div class="code">nama = input("Siapa namamu? ")
+print("Halo", nama)</div>
+<p>Perhatikan bahwa apa pun yang dimasukkan melalui <code>input()</code> pada awalnya dianggap sebagai teks.</p>
+<div class="code">umur = input("Berapa umurmu? ")
+print("Umur kamu adalah", umur)</div>
+<a class="btn" href="https://colab.research.google.com/" target="_blank">🚀 Buka Google Colab</a>
+<h3>✏️ Latihan</h3>
+<p>Buat program yang bertanya:</p>
+<ul><li>Nama</li><li>Kelas</li><li>Hobi</li></ul>
+</section>
+
+<section class="card" id="operator">
+<span class="time">⏱️ 15 menit</span><h2>➗ Misi 2 — Membuat Python Menghitung</h2>
+<p>Python dapat melakukan operasi matematika.</p>
+<div class="grid">
+<div class="mission"><b>+</b><br>Penjumlahan<br><code>10 + 5</code></div>
+<div class="mission"><b>-</b><br>Pengurangan<br><code>10 - 5</code></div>
+<div class="mission"><b>*</b><br>Perkalian<br><code>10 * 5</code></div>
+<div class="mission"><b>/</b><br>Pembagian<br><code>10 / 5</code></div>
+</div>
+<h3>🔎 Kenapa perlu <code>int()</code>?</h3>
+<p>Jika kita ingin menghitung angka yang dimasukkan pengguna, ubah teks menjadi bilangan bulat.</p>
+<div class="code">harga = int(input("Harga barang: "))
+jumlah = int(input("Jumlah barang: "))
+
+total = harga * jumlah
+
+print("Total:", total)</div>
+<div class="tip"><b>Ingat:</b> <code>input()</code> menerima data sebagai teks. <code>int()</code> membantu mengubahnya menjadi bilangan bulat agar bisa dihitung.</div>
+</section>
+
+<section class="card" id="proyek">
+<span class="time">⏱️ 30 menit</span><h2>💰 BOSS MISSION — Kasir Mini</h2>
+<p>Buat program kasir sederhana dengan kode berikut, lalu modifikasi sesuai kreativitasmu.</p>
+<div class="code">print("================================")
+print("          KASIR MINI")
+print("================================")
+
+nama = input("Nama pembeli : ")
+barang = input("Nama barang  : ")
+harga = int(input("Harga barang : "))
+jumlah = int(input("Jumlah       : "))
+
+total = harga * jumlah
+
+print()
+print("---------- STRUK BELANJA --------")
+print("Pembeli :", nama)
+print("Barang  :", barang)
+print("Harga   :", harga)
+print("Jumlah  :", jumlah)
+print("Total   :", total)
+
+bayar = int(input("Uang bayar   : "))
+kembalian = bayar - total
+
+print("Kembalian :", kembalian)
+print("================================")</div>
+<a class="btn" href="https://colab.research.google.com/" target="_blank">💻 Kerjakan di Google Colab</a>
+<h3>🎯 Target minimal</h3>
+<ul><li>Program meminta nama pembeli.</li><li>Program meminta barang.</li><li>Program meminta harga.</li><li>Program meminta jumlah.</li><li>Program menghitung total.</li><li>Program meminta uang pembayaran.</li><li>Program menghitung kembalian.</li></ul>
+<h3>🧾 Contoh hasil</h3>
+<div class="receipt">================================
+          KASIR MINI
+================================
+Pembeli : Raka
+Barang  : Es Teh
+Harga   : 5000
+Jumlah  : 3
+Total   : 15000
+Uang bayar : 20000
+Kembalian  : 5000
+================================</div>
+</section>
+
+<section class="card" id="challenge">
+<span class="time">⏱️ 10 menit</span><h2>🔥 Challenge Level</h2>
+<div class="grid">
+<div class="level"><b>⭐ Level 1 — Kasir Dasar</b><br>Program 1 barang dengan total dan kembalian.</div>
+<div class="level"><b>⭐⭐ Level 2 — Kasir Kreatif</b><br>Tambahkan tanggal, diskon sederhana, atau ucapan terima kasih.</div>
+<div class="level"><b>⭐⭐⭐ Level 3 — Warung Mini</b><br>Hitung minimal 3 jenis barang dan tampilkan total keseluruhan.</div>
+</div>
+<p><b>Bonus ide:</b> Buat kasir khusus kantin sekolah, toko game, toko buku, atau warung favoritmu.</p>
+</section>
+
+<section class="card" id="debug">
+<span class="time">⏱️ 5 menit</span><h2>🕵️ Debugging Mission</h2>
+<p>Temukan masalah pada program berikut:</p>
+<div class="code">harga = input("Harga: ")
+jumlah = input("Jumlah: ")
+
+total = harga * jumlah
+
+print("Total:", total)</div>
+<p><b>Pertanyaan:</b> Mengapa program tersebut tidak menghitung seperti yang kita inginkan? Bagaimana memperbaikinya?</p>
+<textarea placeholder="Tulis jawabanmu..."></textarea>
+<div class="callout"><b>Petunjuk:</b> Ingat kembali fungsi <code>int()</code>.</div>
+</section>
+
+<section class="card">
+<span class="time">⏱️ 5 menit</span><h2>🧠 Mini Quiz</h2>
+<div class="quiz">
+<p><b>1. Fungsi apa yang digunakan untuk menerima input dari pengguna?</b></p>
+<label><input type="radio" name="q1" value="1"> input()</label><label><input type="radio" name="q1" value="0"> print()</label><label><input type="radio" name="q1" value="0"> int()</label>
+<p><b>2. Operator apa yang digunakan untuk perkalian?</b></p>
+<label><input type="radio" name="q2" value="0"> +</label><label><input type="radio" name="q2" value="1"> *</label><label><input type="radio" name="q2" value="0"> /</label>
+<p><b>3. Apa fungsi <code>int()</code> dalam contoh kasir?</b></p>
+<label><input type="radio" name="q3" value="1"> Mengubah input menjadi bilangan bulat</label><label><input type="radio" name="q3" value="0"> Menampilkan teks</label><label><input type="radio" name="q3" value="0"> Menghapus data</label>
+<button onclick="quiz()">Cek Jawaban</button><div id="quizResult" class="result"></div>
+</div>
+</section>
+
+<section class="card" id="refleksi">
+<span class="time">⏱️ 5 menit</span><h2>📝 Refleksi</h2>
+<label>Nama<input placeholder="Nama lengkap"></label>
+<label>Hal paling menarik hari ini<textarea placeholder="Tulis jawabanmu..."></textarea></label>
+<label>Bagian paling sulit<textarea placeholder="Tulis jawabanmu..."></textarea></label>
+<label>Jika punya toko sendiri, apa yang ingin kamu jual?<textarea placeholder="Tulis jawabanmu..."></textarea></label>
+<h3>✅ Checklist Produk</h3>
+<label class="check"><input type="checkbox" class="progressCheck"> Program dapat menerima input.</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Program dapat menghitung total.</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Program dapat menghitung kembalian.</label>
+<label class="check"><input type="checkbox" class="progressCheck"> Saya menambahkan kreativitas sendiri.</label>
+<button onclick="window.print()">🖨️ Cetak / Simpan sebagai PDF</button>
+</section>
+
+<section class="card">
+<h2>🏆 Misi Selesai!</h2>
+<div class="callout"><b>Skill baru terbuka:</b> Kamu sekarang bisa membuat program yang menerima data dari pengguna dan melakukan perhitungan. Misi berikutnya: membuat Python mengambil keputusan dengan <code>if</code>, <code>elif</code>, dan <code>else</code>.</div>
+</section>
+<footer>Python Adventure • LKPD Informatika Kelas X • Misi 02</footer>
+</main>
+<script>
+function updateProgress(){const c=[...document.querySelectorAll('.progressCheck')],d=c.filter(x=>x.checked).length,p=Math.round(d/c.length*100);document.getElementById('bar').style.width=p+'%';document.getElementById('progressText').textContent='Progress: '+p+'%';}
+document.querySelectorAll('.progressCheck').forEach(x=>x.addEventListener('change',updateProgress));
+function quiz(){let s=0;document.querySelectorAll('input[type=radio]:checked').forEach(x=>s+=Number(x.value));document.getElementById('quizResult').textContent=s===3?'🎉 Hebat! 3/3 benar.':'💡 Coba lagi. Ingat input() untuk menerima data, * untuk perkalian, dan int() untuk mengubah ke bilangan bulat.';}
+</script>
+</body>
+</html>
